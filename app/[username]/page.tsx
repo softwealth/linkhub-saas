@@ -17,8 +17,8 @@ type User = {
 }
 
 async function getUser(username: string) {
-  const user = db.prepare('SELECT * FROM users WHERE username = ?').get(username) as User | undefined
-  return user
+  const user = db.prepare('SELECT * FROM users WHERE username = ?').get(username) as User | null
+  return user ?? undefined
 }
 
 async function getLinks(userId: number) {
