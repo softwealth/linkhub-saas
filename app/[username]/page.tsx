@@ -28,8 +28,9 @@ async function getLinks(userId: number) {
   return links
 }
 
-export default async function UserProfile({ params }: { params: { username: string } }) {
-  const user = await getUser(params.username)
+export default async function UserProfile({ params }: { params: Promise<{ username: string }> }) {
+  const { username } = await params
+  const user = await getUser(username)
   
   if (!user) {
     notFound()
